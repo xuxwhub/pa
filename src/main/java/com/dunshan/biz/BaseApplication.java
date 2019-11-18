@@ -1,11 +1,11 @@
 package com.dunshan.biz;
 
-import com.dunshan.biz.service.PbClient;
-import org.mybatis.spring.annotation.MapperScan;
+import com.dunshan.biz.client.PbClient;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
-import org.springframework.cloud.netflix.feign.EnableFeignClients;
+import org.springframework.cloud.openfeign.EnableFeignClients;
+import tk.mybatis.spring.annotation.MapperScan;
 
 
 @SpringBootApplication(scanBasePackages = {"com.dunshan.biz"})

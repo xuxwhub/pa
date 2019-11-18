@@ -10,10 +10,10 @@ import org.springframework.util.StringUtils;
 
 /**
  * @author xuxinwei
- * @create 2019-10-18
+ * @create 2019-10-31
  */
 @Service
-public class UserService {
+public class PAService {
 
   @Resource
   private UserMapper mapper;
@@ -28,17 +28,6 @@ public class UserService {
 
   public Boolean add(User user) {
     return mapper.insertSelective(user) > 0;
-  }
-
-  public Boolean addMock() {
-    Random random = new Random();
-    Integer x = random.nextInt(10000);
-    User mockUser = new User();
-    mockUser.setEmail("test" + x + "@dunshan.com");
-    mockUser.setMobile("1760000" + x);
-    mockUser.setUserName("张三" + x);
-    mockUser.setUserNumber("0000" + x);
-    return add(mockUser);
   }
 
   public Boolean deleteById(String id) {

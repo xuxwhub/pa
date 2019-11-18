@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -56,6 +57,23 @@ public class UserController {
   @PostMapping("/update")
   public ResultVO<Boolean> update(@RequestBody User user) {
     Boolean result = userService.update(user);
+    return ResultVO.<Boolean>builder().success(result).build();
+  }
+
+
+  @PostMapping("/add1")
+  public ResultVO<Boolean> add1(User user) {
+    Boolean result = userService.add(user);
+    return ResultVO.<Boolean>builder().success(result).build();
+  }
+
+  @PostMapping("/add2")
+  public ResultVO<Boolean> add1(@RequestParam String userNumber, @RequestParam String userName) {
+    User user = new User();
+    user.setUserNumber(userNumber);
+    user.setUserName(userName);
+
+    Boolean result = userService.add(user);
     return ResultVO.<Boolean>builder().success(result).build();
   }
 
