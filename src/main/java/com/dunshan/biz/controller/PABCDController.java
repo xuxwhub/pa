@@ -4,7 +4,10 @@ import com.dunshan.biz.model.User;
 import com.dunshan.biz.service.PABCDRedisMqService;
 import com.dunshan.biz.service.PABCDRedisService;
 import com.dunshan.biz.service.PABCDService;
+import com.dunshan.biz.service.PrMqService;
 import com.dunshan.common.vo.ResultVO;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +23,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(value = "pabcd")
 public class PABCDController {
+
+  private static final Logger logger = LoggerFactory.getLogger(PABCDController.class);
 
   @Autowired
   private PABCDService pabcdService;
@@ -50,6 +55,7 @@ public class PABCDController {
 
   @GetMapping("/query/{id}")
   public ResultVO<User> getById(@PathVariable("id") String id) {
+    logger.info("xxx");
     User user = pabcdService.getById(id);
     return ResultVO.<User>builder().success(user).build();
   }
