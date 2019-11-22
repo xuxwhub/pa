@@ -5,7 +5,7 @@ import java.util.Date;
 import javax.persistence.*;
 
 @Table(name = "t_user")
-public class User implements Serializable {
+public class User extends DynamicTableEntity implements Serializable {
     /**
      * 主键
      */
