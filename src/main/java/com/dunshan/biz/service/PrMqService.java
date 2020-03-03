@@ -46,7 +46,7 @@ public class PrMqService {
     logger.info("发送消息【{}】【{}】：{}", EXCHANGE_COMMON, ROUTING_KEY_LOG, message);
 
     MessagePostProcessor messagePostProcessor = message1 -> {
-      message1.getMessageProperties().setHeader(TEST_FLAG, TestFlagHolder.get());
+      message1.getMessageProperties().setHeader(TEST_FLAG, TestFlagHolder.get() == null ? "" : TestFlagHolder.get());
       return message1;
     };
 
