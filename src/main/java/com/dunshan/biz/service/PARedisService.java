@@ -17,7 +17,7 @@ public class PARedisService {
   private static final Logger logger = LoggerFactory.getLogger(PARedisService.class);
 
   @Autowired
-  private UserService userService;
+  private PAService userService;
 
   @Autowired
   private CacheService cacheService;
