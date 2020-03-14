@@ -26,7 +26,12 @@ public class PARedisService {
   public User getById(String id) {
     User cache = cacheService.getUser(id);
     logger.info("cache user: {}", cache);
-    return userService.getById(id);
+    if (cache == null) {
+      cache = userService.getById(id);
+      cacheService.saveUser(cache);
+      return cacheService.getUser(id);
+    }
+    return cache;
   }
 
   @Transactional
