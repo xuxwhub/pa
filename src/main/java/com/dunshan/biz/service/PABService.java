@@ -35,8 +35,11 @@ public class PABService {
 
   public User getById(String id) {
     User result = paService.getById(id);
-    ResultVO<User> pbUser = pbClient.get4b(id);
-    logger.info("pbClient get result: " + pbUser);
+    ResultVO<User> pbResult = pbClient.get4b(id);
+    logger.info("pbClient get result: " + pbResult);
+    if (ErpConstants.ErrorEnum.SUCCESS_200.getIndex() != pbResult.getCode()) {
+      throw new BusinessErrorException("pbClient getById error !" + pbResult.getMsg());
+    }
     return result;
   }
 
