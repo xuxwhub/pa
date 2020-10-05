@@ -5,6 +5,8 @@ import com.dunshan.biz.model.User;
 import com.dunshan.common.ErpConstants;
 import com.dunshan.common.exception.BusinessErrorException;
 import com.dunshan.common.vo.ResultVO;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,12 +41,17 @@ public class PABService {
   }
 
   @Transactional
+//  @HystrixCommand(commandProperties = {
+//      @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "500"),//指定多久超时，单位毫秒。超时进fallback
+//      @HystrixProperty(name = "circuitBreaker.requestVolumeThreshold", value = "10"),//判断熔断的最少请求数，默认是10；只有在一个统计窗口内处理的请求数量达到这个阈值，才会进行熔断与否的判断
+//      @HystrixProperty(name = "circuitBreaker.errorThresholdPercentage", value = "30"),//判断熔断的阈值，默认值50，表示在一个统计窗口内有50%的请求处理失败，会触发熔断
+//  })
   public Boolean add(User user) {
     Boolean result = paService.add(user);
     ResultVO<Boolean> pbResult = pbClient.add4b(user);
     logger.info("pbClient add result: " + pbResult);
     if (ErpConstants.ErrorEnum.SUCCESS_200.getIndex() != pbResult.getCode()) {
-      throw new BusinessErrorException("pbClient add error !");
+      throw new BusinessErrorException("pbClient add error !" + pbResult.getMsg());
     }
     return result;
   }
@@ -55,7 +62,7 @@ public class PABService {
     ResultVO<Boolean> pbResult = pbClient.update4b(user);
     logger.info("pbClient update result: " + pbResult);
     if (ErpConstants.ErrorEnum.SUCCESS_200.getIndex() != pbResult.getCode()) {
-      throw new BusinessErrorException("pbClient update error !");
+      throw new BusinessErrorException("pbClient update error !" + pbResult.getMsg());
     }
     return result;
   }
@@ -66,7 +73,7 @@ public class PABService {
     ResultVO<Boolean> pbResult = pbClient.delete4b(id);
     logger.info("pbClient delete result: " + pbResult);
     if (ErpConstants.ErrorEnum.SUCCESS_200.getIndex() != pbResult.getCode()) {
-      throw new BusinessErrorException("pbClient delete error !");
+      throw new BusinessErrorException("pbClient delete error !" + pbResult.getMsg());
     }
     return result;
   }
