@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestBody;
  * @author xuxinwei
  * @create 2019-10-20
  */
-@FeignClient(name = "PB-SERVICE", fallback = PbClientFallback.class)
+@FeignClient(name = "PB-SERVICE"
+//    , fallback = PbClientFallback.class
+)
 @Component
 public interface PbClient {
 
