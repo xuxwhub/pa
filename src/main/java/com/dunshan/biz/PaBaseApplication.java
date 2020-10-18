@@ -3,7 +3,6 @@ package com.dunshan.biz;
 import com.dunshan.biz.client.PbClient;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
@@ -15,10 +14,10 @@ import tk.mybatis.spring.annotation.MapperScan;
 @EnableEurekaClient
 @EnableFeignClients(basePackageClasses = {PbClient.class})
 @EnableAspectJAutoProxy(proxyTargetClass = true, exposeProxy = true)
-public class BaseApplication {
+public class PaBaseApplication {
 
   public static void main(String[] args) {
-    SpringApplication.run(BaseApplication.class, args);
+    SpringApplication.run(PaBaseApplication.class, args);
   }
 
 }
